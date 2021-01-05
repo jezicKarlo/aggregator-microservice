@@ -8,6 +8,15 @@ import org.springframework.stereotype.Component;
 @Data
 public class ConfigurationData {
 
-    @Value("${temperatureName}")
-    private String temperatureName;
+    @Value("${microservice.temperature.name}")
+    private String temperatureMicroservice;
+
+    @Value("$({microservice.humidity.name)}")
+    private String humidityMicroserviceName;
+
+    @Value("${microservice.temperature.unit}")
+    private String temperatureUnit;
+
+    @Value("${microservice.humidity.unit}")
+    private String humidityUnit;
 }
