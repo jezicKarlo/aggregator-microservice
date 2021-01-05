@@ -7,6 +7,6 @@ import javax.ws.rs.PathParam;
 public interface ReadingsAPI {
 
     @GET
-    @Path("{host}/current-readings")
-    Integer fetchReadings(@PathParam("host") String host);
+    @Path("current-readings")
+    Integer fetchReadings();
 }
