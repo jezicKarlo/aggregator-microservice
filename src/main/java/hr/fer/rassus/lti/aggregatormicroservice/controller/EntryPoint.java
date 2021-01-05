@@ -1,6 +1,7 @@
 package hr.fer.rassus.lti.aggregatormicroservice.controller;
 
 import hr.fer.rassus.lti.aggregatormicroservice.config.ConfigurationData;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,8 +14,8 @@ public class EntryPoint {
         this.configurationData = configurationData;
     }
 
-    @RequestMapping("/temperatureName")
+    @GetMapping("/api/readings")
     public String temperatureName() {
-        return configurationData.getTemperatureMicroservice();
+        return null;
     }
 }
