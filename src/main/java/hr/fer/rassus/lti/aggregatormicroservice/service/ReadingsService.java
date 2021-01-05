@@ -16,7 +16,7 @@ public class ReadingsService {
         humidityRepository = new ReadingsRepository(config.getTemperatureMicroservice());
     }
 
-    public Reading getReadings() {
+    public Reading getReading() {
         Integer temperature = temperatureRepository.fetch();
         Integer humidity = humidityRepository.fetch();
 
