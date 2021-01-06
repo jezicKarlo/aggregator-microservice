@@ -17,7 +17,7 @@ public class EntryPoint {
         service = new ReadingsService(configurationData);
     }
 
-    @GetMapping("/api/readings")
+    @GetMapping("current-readings")
     public Reading temperatureName() {
         return service.getReading();
     }
