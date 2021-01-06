@@ -1,7 +1,7 @@
 package hr.fer.rassus.lti.aggregatormicroservice.controller;
 
 import hr.fer.rassus.lti.aggregatormicroservice.config.ConfigurationData;
-import hr.fer.rassus.lti.aggregatormicroservice.response.Reading;
+import hr.fer.rassus.lti.aggregatormicroservice.models.Reading;
 import hr.fer.rassus.lti.aggregatormicroservice.service.ReadingsService;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

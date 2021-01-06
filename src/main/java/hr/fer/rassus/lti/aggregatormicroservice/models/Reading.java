@@ -1,4 +1,4 @@
-package hr.fer.rassus.lti.aggregatormicroservice.response;
+package hr.fer.rassus.lti.aggregatormicroservice.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

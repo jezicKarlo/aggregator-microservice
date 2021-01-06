@@ -5,6 +5,7 @@ import feign.Retryer;
 import feign.gson.GsonDecoder;
 import feign.jaxrs.JAXRSContract;
 import hr.fer.rassus.lti.aggregatormicroservice.api.ReadingsAPI;
+import hr.fer.rassus.lti.aggregatormicroservice.models.ReadingResponse;
 
 public class ReadingsRepository {
 
@@ -26,7 +27,7 @@ public class ReadingsRepository {
         return !url.equals(newUrl);
     }
 
-    public String fetch() {
+    public ReadingResponse fetch() {
         return api.fetchReadings();
     }
 

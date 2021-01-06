@@ -2,7 +2,7 @@ package hr.fer.rassus.lti.aggregatormicroservice.service;
 
 import hr.fer.rassus.lti.aggregatormicroservice.config.ConfigurationData;
 import hr.fer.rassus.lti.aggregatormicroservice.repository.ReadingsRepository;
-import hr.fer.rassus.lti.aggregatormicroservice.response.Reading;
+import hr.fer.rassus.lti.aggregatormicroservice.models.Reading;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 
@@ -53,14 +53,14 @@ public class ReadingsService {
     public Reading getReading() {
         buildRepositories();
         return new Reading(
-                adapt(temperatureRepository.fetch(),config.getTemperatureUnit()),
-                humidityRepository.fetch()
+                adaptTemperature(temperatureRepository.fetch().getReading(), config.getTemperatureUnit()),
+                humidityRepository.fetch().getReading()
         );
     }
 
-    private String adapt(String temperature, String temperatureUnit) {
-        if (temperatureUnit.equals("K")){
-           return Double.parseDouble(temperature) + 273.15 + "";
+    private String adaptTemperature(String temperature, String temperatureUnit) {
+        if (temperatureUnit.equals("K")) {
+            return Double.parseDouble(temperature) + 273.15 + "";
         }
         return temperature;
     }

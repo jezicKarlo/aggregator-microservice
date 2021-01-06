@@ -10,7 +10,7 @@ public class ConfigurationData {
     @Value("${microservice.temperature.name}")
     private String temperatureMicroservice;
 
-    @Value("$({microservice.humidity.name)}")
+    @Value("${microservice.humidity.name}")
     private String humidityMicroserviceName;
 
     @Value("${microservice.temperature.unit}")
