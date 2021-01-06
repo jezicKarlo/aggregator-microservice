@@ -58,7 +58,7 @@ public class ReadingsService {
 
     private String adapt(String temperature, String temperatureUnit) {
         if (temperatureUnit.equals("K")){
-           return Double.parseDouble(temperature) - 273.15 + "";
+           return Double.parseDouble(temperature) + 273.15 + "";
         }
         return temperature;
     }
