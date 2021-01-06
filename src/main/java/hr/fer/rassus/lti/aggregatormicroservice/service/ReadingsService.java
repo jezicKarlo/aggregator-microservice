@@ -27,14 +27,22 @@ public class ReadingsService {
     }
 
     private void buildTemperatureRepository() {
-        ServiceInstance temperatureMicroservice = discoveryClient.getInstances(config.getTemperatureMicroservice()).get(0);
+        List<ServiceInstance> instances = discoveryClient.getInstances(config.getTemperatureMicroservice());
+        if (instances.size() == 0) {
+            return;
+        }
+        ServiceInstance temperatureMicroservice = instances.get(0);
         if (temperatureRepository.hasToRebuild(temperatureMicroservice.getUri().toString())) {
             temperatureRepository = new ReadingsRepository(temperatureMicroservice.getUri().toString());
         }
     }
 
     private void buildHumidityRepository() {
-        ServiceInstance humidityMicroservice = discoveryClient.getInstances(config.getHumidityMicroserviceName()).get(0);
+        List<ServiceInstance> instances = discoveryClient.getInstances(config.getHumidityMicroserviceName());
+        if (instances.size() == 0) {
+            return;
+        }
+        ServiceInstance humidityMicroservice = instances.get(0);
         if (humidityRepository.hasToRebuild(humidityMicroservice.getUri().toString())) {
             humidityRepository = new ReadingsRepository(humidityMicroservice.getUri().toString());
         }
