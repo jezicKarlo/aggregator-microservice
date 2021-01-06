@@ -5,6 +5,6 @@ import javax.ws.rs.Path;
 
 public interface ReadingsAPI {
     @GET
-    @Path("current-readings")
+    @Path("current-reading")
     String fetchReadings();
 }

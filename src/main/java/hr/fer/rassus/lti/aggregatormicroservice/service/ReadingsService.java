@@ -18,6 +18,8 @@ public class ReadingsService {
     public ReadingsService(ConfigurationData config, DiscoveryClient discoveryClient) {
         this.config = config;
         this.discoveryClient = discoveryClient;
+        temperatureRepository = new ReadingsRepository();
+        humidityRepository = new ReadingsRepository();
         buildRepositories();
     }
 

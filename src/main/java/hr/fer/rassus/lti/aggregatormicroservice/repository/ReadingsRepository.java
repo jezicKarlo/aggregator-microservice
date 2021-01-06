@@ -11,6 +11,9 @@ public class ReadingsRepository {
     private ReadingsAPI api;
     private String url;
 
+    public ReadingsRepository() {
+    }
+
     public ReadingsRepository(String url) {
         build(url);
         this.url = url;
@@ -18,7 +21,7 @@ public class ReadingsRepository {
 
     public boolean hasToRebuild(String newUrl) {
         if (url == null) {
-            return false;
+            return true;
         }
         return !url.equals(newUrl);
     }
