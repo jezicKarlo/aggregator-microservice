@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 public class EntryPoint {
-
     private ReadingsService service;
 
     public EntryPoint(ConfigurationData configurationData, DiscoveryClient discoveryClient) {

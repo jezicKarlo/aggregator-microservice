@@ -49,15 +49,18 @@ public class ReadingsService {
     }
 
     public Reading getReading() {
-        rebuildRepositories();
-        String temperature = temperatureRepository.fetch();
-        String humidity = humidityRepository.fetch();
-
-        return new Reading(temperature, humidity);
+        buildRepositories();
+        return new Reading(
+                adapt(temperatureRepository.fetch(),config.getTemperatureUnit()),
+                humidityRepository.fetch()
+        );
     }
 
-    private void rebuildRepositories() {
-        buildRepositories();
+    private String adapt(String temperature, String temperatureUnit) {
+        if (temperatureUnit.equals("K")){
+           return Double.parseDouble(temperature) - 273.15 + "";
+        }
+        return temperature;
     }
 
     public List<ServiceInstance> getInstance(String applicationName) {

@@ -16,15 +16,15 @@ public class ReadingsRepository {
         this.url = url;
     }
 
-    public void rebuild(String url) {
-        build(url);
-    }
-
     public boolean hasToRebuild(String newUrl) {
         if (url == null) {
             return false;
         }
         return !url.equals(newUrl);
+    }
+
+    public String fetch() {
+        return api.fetchReadings();
     }
 
     private void build(String url) {
@@ -33,9 +33,5 @@ public class ReadingsRepository {
                 .decoder(new GsonDecoder())
                 .retryer(new Retryer.Default())
                 .target(ReadingsAPI.class, url);
-    }
-
-    public String fetch() {
-        return api.fetchReadings();
     }
 }

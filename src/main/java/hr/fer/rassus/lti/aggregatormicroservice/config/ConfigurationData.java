@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class ConfigurationData {
-
     @Value("${microservice.temperature.name}")
     private String temperatureMicroservice;
 
