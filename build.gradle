@@ -47,3 +47,20 @@ dependencyManagement {
 test {
     useJUnitPlatform()
 }
+
+jib {
+    from{
+        image 'openjdk:11-jre-slim'
+    }
+    to {
+        image 'aggregator-microservice'
+    }
+    extraDirectories {
+        paths {
+            path {
+                setFrom("script")
+                into = "${jib.container.appRoot}/script"
+            }
+        }
+    }
+}
