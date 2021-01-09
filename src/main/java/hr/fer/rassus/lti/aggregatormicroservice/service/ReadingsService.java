@@ -52,14 +52,16 @@ public class ReadingsService {
 
     public Reading getReading() {
         buildRepositories();
-        return new Reading(
-                adaptTemperature(temperatureRepository.fetch().getReading(), config.getTemperatureUnit()),
-                humidityRepository.fetch().getReading()
-        );
+        String unit = config.getTemperatureUnit();
+        return Reading.builder()
+                .temperature(adaptTemperature(temperatureRepository.fetch().getReading(), unit))
+                .temperatureUnit(unit)
+                .humidity(humidityRepository.fetch().getReading())
+                .build();
     }
 
-    private String adaptTemperature(String temperature, String temperatureUnit) {
-        if (temperatureUnit.equals("K")) {
+    private String adaptTemperature(String temperature, String unit) {
+        if (unit.equals("K")) {
             return Double.parseDouble(temperature) + 273.15 + "";
         }
         return temperature;

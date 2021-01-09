@@ -1,11 +1,12 @@
 package hr.fer.rassus.lti.aggregatormicroservice.models;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+@Builder
 public class Reading {
     private String temperature;
+    private String temperatureUnit;
     private String humidity;
 }
