@@ -6,25 +6,20 @@ import feign.gson.GsonDecoder;
 import feign.jaxrs.JAXRSContract;
 import hr.fer.rassus.lti.aggregatormicroservice.api.ReadingsAPI;
 import hr.fer.rassus.lti.aggregatormicroservice.models.ReadingResponse;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class ReadingsRepository {
-
     private ReadingsAPI api;
     private String url;
 
-    public ReadingsRepository() {
-    }
-
     public ReadingsRepository(String url) {
-        build(url);
         this.url = url;
+        build(url);
     }
 
     public boolean hasToRebuild(String newUrl) {
-        if (url == null) {
-            return true;
-        }
-        return !url.equals(newUrl);
+        return url == null || !url.equals(newUrl);
     }
 
     public ReadingResponse fetch() {

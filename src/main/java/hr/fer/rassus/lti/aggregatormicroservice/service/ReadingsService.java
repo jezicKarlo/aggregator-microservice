@@ -1,8 +1,8 @@
 package hr.fer.rassus.lti.aggregatormicroservice.service;
 
 import hr.fer.rassus.lti.aggregatormicroservice.config.ConfigurationData;
-import hr.fer.rassus.lti.aggregatormicroservice.repository.ReadingsRepository;
 import hr.fer.rassus.lti.aggregatormicroservice.models.Reading;
+import hr.fer.rassus.lti.aggregatormicroservice.repository.ReadingsRepository;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 
@@ -29,25 +29,27 @@ public class ReadingsService {
     }
 
     private void buildTemperatureRepository() {
-        List<ServiceInstance> instances = discoveryClient.getInstances(config.getTemperatureMicroservice());
-        if (instances.size() == 0) {
-            return;
-        }
-        ServiceInstance temperatureMicroservice = instances.get(0);
-        if (temperatureRepository.hasToRebuild(temperatureMicroservice.getUri().toString())) {
-            temperatureRepository = new ReadingsRepository(temperatureMicroservice.getUri().toString());
-        }
+        discoveryClient.getInstances(config.getTemperatureMicroserviceName())
+                        .stream()
+                        .findAny()
+                        .map(microservice -> microservice.getUri().toString())
+                        .ifPresent(newUrl -> {
+                            if (temperatureRepository.hasToRebuild(newUrl)) {
+                                temperatureRepository = new ReadingsRepository(newUrl);
+                            }
+                        });
     }
 
     private void buildHumidityRepository() {
-        List<ServiceInstance> instances = discoveryClient.getInstances(config.getHumidityMicroserviceName());
-        if (instances.size() == 0) {
-            return;
-        }
-        ServiceInstance humidityMicroservice = instances.get(0);
-        if (humidityRepository.hasToRebuild(humidityMicroservice.getUri().toString())) {
-            humidityRepository = new ReadingsRepository(humidityMicroservice.getUri().toString());
-        }
+        discoveryClient.getInstances(config.getHumidityMicroserviceName())
+                .stream()
+                .findAny()
+                .map(microservice -> microservice.getUri().toString())
+                .ifPresent(newUrl -> {
+                    if (humidityRepository.hasToRebuild(newUrl)) {
+                        humidityRepository = new ReadingsRepository(newUrl);
+                    }
+                });
     }
 
     public Reading getReading() {
